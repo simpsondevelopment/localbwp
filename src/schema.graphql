@@ -8,11 +8,17 @@ type Query {
     after: String
     orderBy: UserOrderByInput
   ): [User!]!
+  beers: [Beer!]!
+  wings: [Wing!]!
+  pizzas: [Pizza!]!
   me: User!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): AuthPayload!
+  createBeer(data: CreateBeerInput!): Beer!
+  createWing(data: CreateWingInput!): Wing!
+  createPizza(data: CreatePizzaInput!): Pizza!
   login(data: LoginUserInput!): AuthPayload!
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
@@ -25,6 +31,32 @@ type Mutation {
 type AuthPayload {
   token: String!
   user: User!
+}
+
+input CreateLocationInput {
+  name: String!
+  city: String
+  postalCode: String
+}
+
+input CreateBeerInput {
+  brand: String!
+  price: Float
+  rating: Float!
+}
+
+input CreatePizzaInput {
+  style: String!
+  size: String!
+  price: Float
+  rating: Float!
+}
+
+input CreateWingInput {
+  flavour: String!
+  price: Float
+  rating: Float!
+  quantity: Int
 }
 
 input CreateUserInput {
@@ -46,7 +78,7 @@ input UpdateUserInput {
   email: String
   password: String
 }
-
+"This section is for models ----------------------------------------------------------------"
 type User {
   id: ID!
   name: String!
@@ -55,6 +87,60 @@ type User {
   city: String
   postalCode: String
   rating: Int
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Location {
+  id: ID!
+  name: String!
+  city: String
+  postalCode: String
+  latitude: Float
+  longitude: Float
+  updatedAt: String!
+  createdAt: String!
+  pizzas: [Pizza!]!
+  wings: [Wing!]!
+  beers: [Beer!]!
+}
+
+type Wing {
+  id: ID!
+  flavour: String!
+  price: Float
+  rating: Float!
+  quantity: Int
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Beer {
+  id: ID!
+  brand: String!
+  price: Float
+  rating: Float!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Pizza {
+  id: ID!
+  style: String!
+  size: String!
+  price: Float
+  rating: Float!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Review {
+  name: User!
+  pizzaId: Pizza
+  wingId: Wing
+  beerId: Beer
+  rating: Float!
+  comments: String
   updatedAt: String!
   createdAt: String!
 }
