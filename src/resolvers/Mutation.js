@@ -90,6 +90,33 @@ const Mutation = {
       },
     });
   },
+  createLocation(parent, args, { prisma }, info) {
+    return prisma.mutation.createLocation({
+      data: {
+        ...args.data,
+      },
+    });
+  },
+  createReview(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    console.log(userId);
+
+    return prisma.mutation.createReview(
+      {
+        data: {
+          price: args.data.price,
+          rating: args.data.rating,
+          comments: args.data.comments,
+          name: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      },
+      info
+    );
+  },
 };
 
 export { Mutation as default };

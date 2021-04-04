@@ -59,9 +59,7 @@ type Pizza {
 type Review {
   id: ID! @unique @id
   name: User!
-  pizzaId: Pizza
-  wingId: Wing
-  beerId: Beer
+  price: Float
   rating: Float!
   comments: String
   updatedAt: DateTime! @updatedAt

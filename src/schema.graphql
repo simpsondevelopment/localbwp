@@ -9,6 +9,7 @@ type Query {
     orderBy: UserOrderByInput
   ): [User!]!
   beers: [Beer!]!
+  locations: [Location!]!
   wings: [Wing!]!
   pizzas: [Pizza!]!
   me: User!
@@ -19,6 +20,8 @@ type Mutation {
   createBeer(data: CreateBeerInput!): Beer!
   createWing(data: CreateWingInput!): Wing!
   createPizza(data: CreatePizzaInput!): Pizza!
+  createLocation(data: CreateLocationInput!): Location!
+  createReview(data: CreateReviewInput!): Review!
   login(data: LoginUserInput!): AuthPayload!
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
@@ -37,6 +40,8 @@ input CreateLocationInput {
   name: String!
   city: String
   postalCode: String
+  latitude: Float
+  longitude: Float
 }
 
 input CreateBeerInput {
@@ -57,6 +62,12 @@ input CreateWingInput {
   price: Float
   rating: Float!
   quantity: Int
+}
+
+input CreateReviewInput {
+  price: Float
+  rating: Float!
+  comments: String
 }
 
 input CreateUserInput {
@@ -136,10 +147,8 @@ type Pizza {
 
 type Review {
   name: User!
-  pizzaId: Pizza
-  wingId: Wing
-  beerId: Beer
   rating: Float!
+  price: Float
   comments: String
   updatedAt: String!
   createdAt: String!

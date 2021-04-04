@@ -1,5 +1,5 @@
 # source: http://localhost:4466/localbwp/dev
-# timestamp: Mon Apr 05 2021 15:49:38 GMT-0600 (Mountain Daylight Time)
+# timestamp: Sun Apr 04 2021 12:08:01 GMT-0600 (Mountain Daylight Time)
 
 type AggregateBeer {
   count: Int!
@@ -58,11 +58,6 @@ input BeerCreateInput {
 input BeerCreateManyInput {
   create: [BeerCreateInput!]
   connect: [BeerWhereUniqueInput!]
-}
-
-input BeerCreateOneInput {
-  create: BeerCreateInput
-  connect: BeerWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -158,23 +153,9 @@ input BeerUpdateManyInput {
   upsert: [BeerUpsertWithWhereUniqueNestedInput!]
 }
 
-input BeerUpdateOneInput {
-  create: BeerCreateInput
-  connect: BeerWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: BeerUpdateDataInput
-  upsert: BeerUpsertNestedInput
-}
-
 input BeerUpdateWithWhereUniqueNestedInput {
   where: BeerWhereUniqueInput!
   data: BeerUpdateDataInput!
-}
-
-input BeerUpsertNestedInput {
-  update: BeerUpdateDataInput!
-  create: BeerCreateInput!
 }
 
 input BeerUpsertWithWhereUniqueNestedInput {
@@ -774,40 +755,40 @@ scalar Long
 type Mutation {
   createLocation(data: LocationCreateInput!): Location!
   createReview(data: ReviewCreateInput!): Review!
-  createWing(data: WingCreateInput!): Wing!
-  createBeer(data: BeerCreateInput!): Beer!
   createPizza(data: PizzaCreateInput!): Pizza!
   createUser(data: UserCreateInput!): User!
+  createWing(data: WingCreateInput!): Wing!
+  createBeer(data: BeerCreateInput!): Beer!
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateReview(data: ReviewUpdateInput!, where: ReviewWhereUniqueInput!): Review
-  updateWing(data: WingUpdateInput!, where: WingWhereUniqueInput!): Wing
-  updateBeer(data: BeerUpdateInput!, where: BeerWhereUniqueInput!): Beer
   updatePizza(data: PizzaUpdateInput!, where: PizzaWhereUniqueInput!): Pizza
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateWing(data: WingUpdateInput!, where: WingWhereUniqueInput!): Wing
+  updateBeer(data: BeerUpdateInput!, where: BeerWhereUniqueInput!): Beer
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteReview(where: ReviewWhereUniqueInput!): Review
-  deleteWing(where: WingWhereUniqueInput!): Wing
-  deleteBeer(where: BeerWhereUniqueInput!): Beer
   deletePizza(where: PizzaWhereUniqueInput!): Pizza
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteWing(where: WingWhereUniqueInput!): Wing
+  deleteBeer(where: BeerWhereUniqueInput!): Beer
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertReview(where: ReviewWhereUniqueInput!, create: ReviewCreateInput!, update: ReviewUpdateInput!): Review!
-  upsertWing(where: WingWhereUniqueInput!, create: WingCreateInput!, update: WingUpdateInput!): Wing!
-  upsertBeer(where: BeerWhereUniqueInput!, create: BeerCreateInput!, update: BeerUpdateInput!): Beer!
   upsertPizza(where: PizzaWhereUniqueInput!, create: PizzaCreateInput!, update: PizzaUpdateInput!): Pizza!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertWing(where: WingWhereUniqueInput!, create: WingCreateInput!, update: WingUpdateInput!): Wing!
+  upsertBeer(where: BeerWhereUniqueInput!, create: BeerCreateInput!, update: BeerUpdateInput!): Beer!
   updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
   updateManyReviews(data: ReviewUpdateInput!, where: ReviewWhereInput): BatchPayload!
-  updateManyWings(data: WingUpdateInput!, where: WingWhereInput): BatchPayload!
-  updateManyBeers(data: BeerUpdateInput!, where: BeerWhereInput): BatchPayload!
   updateManyPizzas(data: PizzaUpdateInput!, where: PizzaWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyWings(data: WingUpdateInput!, where: WingWhereInput): BatchPayload!
+  updateManyBeers(data: BeerUpdateInput!, where: BeerWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyReviews(where: ReviewWhereInput): BatchPayload!
-  deleteManyWings(where: WingWhereInput): BatchPayload!
-  deleteManyBeers(where: BeerWhereInput): BatchPayload!
   deleteManyPizzas(where: PizzaWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyWings(where: WingWhereInput): BatchPayload!
+  deleteManyBeers(where: BeerWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -867,11 +848,6 @@ input PizzaCreateInput {
 input PizzaCreateManyInput {
   create: [PizzaCreateInput!]
   connect: [PizzaWhereUniqueInput!]
-}
-
-input PizzaCreateOneInput {
-  create: PizzaCreateInput
-  connect: PizzaWhereUniqueInput
 }
 
 """An edge in a connection."""
@@ -972,23 +948,9 @@ input PizzaUpdateManyInput {
   upsert: [PizzaUpsertWithWhereUniqueNestedInput!]
 }
 
-input PizzaUpdateOneInput {
-  create: PizzaCreateInput
-  connect: PizzaWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: PizzaUpdateDataInput
-  upsert: PizzaUpsertNestedInput
-}
-
 input PizzaUpdateWithWhereUniqueNestedInput {
   where: PizzaWhereUniqueInput!
   data: PizzaUpdateDataInput!
-}
-
-input PizzaUpsertNestedInput {
-  update: PizzaUpdateDataInput!
-  create: PizzaCreateInput!
 }
 
 input PizzaUpsertWithWhereUniqueNestedInput {
@@ -1223,22 +1185,22 @@ input PizzaWhereUniqueInput {
 type Query {
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review]!
-  wings(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wing]!
-  beers(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Beer]!
   pizzas(where: PizzaWhereInput, orderBy: PizzaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pizza]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  wings(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wing]!
+  beers(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Beer]!
   location(where: LocationWhereUniqueInput!): Location
   review(where: ReviewWhereUniqueInput!): Review
-  wing(where: WingWhereUniqueInput!): Wing
-  beer(where: BeerWhereUniqueInput!): Beer
   pizza(where: PizzaWhereUniqueInput!): Pizza
   user(where: UserWhereUniqueInput!): User
+  wing(where: WingWhereUniqueInput!): Wing
+  beer(where: BeerWhereUniqueInput!): Beer
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   reviewsConnection(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReviewConnection!
-  wingsConnection(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WingConnection!
-  beersConnection(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BeerConnection!
   pizzasConnection(where: PizzaWhereInput, orderBy: PizzaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PizzaConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  wingsConnection(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WingConnection!
+  beersConnection(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BeerConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1250,9 +1212,7 @@ type Query {
 type Review implements Node {
   id: ID!
   name(where: UserWhereInput): User!
-  pizzaId(where: PizzaWhereInput): Pizza
-  wingId(where: WingWhereInput): Wing
-  beerId(where: BeerWhereInput): Beer
+  price: Float
   rating: Float!
   comments: String
   updatedAt: DateTime!
@@ -1270,12 +1230,10 @@ type ReviewConnection {
 }
 
 input ReviewCreateInput {
+  price: Float
   rating: Float!
   comments: String
   name: UserCreateOneInput!
-  pizzaId: PizzaCreateOneInput
-  wingId: WingCreateOneInput
-  beerId: BeerCreateOneInput
 }
 
 """An edge in a connection."""
@@ -1290,6 +1248,8 @@ type ReviewEdge {
 enum ReviewOrderByInput {
   id_ASC
   id_DESC
+  price_ASC
+  price_DESC
   rating_ASC
   rating_DESC
   comments_ASC
@@ -1302,6 +1262,7 @@ enum ReviewOrderByInput {
 
 type ReviewPreviousValues {
   id: ID!
+  price: Float
   rating: Float!
   comments: String
   updatedAt: DateTime!
@@ -1348,12 +1309,10 @@ input ReviewSubscriptionWhereInput {
 }
 
 input ReviewUpdateInput {
+  price: Float
   rating: Float
   comments: String
   name: UserUpdateOneInput
-  pizzaId: PizzaUpdateOneInput
-  wingId: WingUpdateOneInput
-  beerId: BeerUpdateOneInput
 }
 
 input ReviewWhereInput {
@@ -1405,6 +1364,28 @@ input ReviewWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  price: Float
+
+  """All values that are not equal to given value."""
+  price_not: Float
+
+  """All values that are contained in given list."""
+  price_in: [Float!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Float!]
+
+  """All values less than the given value."""
+  price_lt: Float
+
+  """All values less than or equal the given value."""
+  price_lte: Float
+
+  """All values greater than the given value."""
+  price_gt: Float
+
+  """All values greater than or equal the given value."""
+  price_gte: Float
   rating: Float
 
   """All values that are not equal to given value."""
@@ -1512,9 +1493,6 @@ input ReviewWhereInput {
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   name: UserWhereInput
-  pizzaId: PizzaWhereInput
-  wingId: WingWhereInput
-  beerId: BeerWhereInput
 }
 
 input ReviewWhereUniqueInput {
@@ -1524,10 +1502,10 @@ input ReviewWhereUniqueInput {
 type Subscription {
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   review(where: ReviewSubscriptionWhereInput): ReviewSubscriptionPayload
-  wing(where: WingSubscriptionWhereInput): WingSubscriptionPayload
-  beer(where: BeerSubscriptionWhereInput): BeerSubscriptionPayload
   pizza(where: PizzaSubscriptionWhereInput): PizzaSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  wing(where: WingSubscriptionWhereInput): WingSubscriptionPayload
+  beer(where: BeerSubscriptionWhereInput): BeerSubscriptionPayload
 }
 
 type User implements Node {
@@ -2032,11 +2010,6 @@ input WingCreateManyInput {
   connect: [WingWhereUniqueInput!]
 }
 
-input WingCreateOneInput {
-  create: WingCreateInput
-  connect: WingWhereUniqueInput
-}
-
 """An edge in a connection."""
 type WingEdge {
   """The item at the end of the edge."""
@@ -2135,23 +2108,9 @@ input WingUpdateManyInput {
   upsert: [WingUpsertWithWhereUniqueNestedInput!]
 }
 
-input WingUpdateOneInput {
-  create: WingCreateInput
-  connect: WingWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: WingUpdateDataInput
-  upsert: WingUpsertNestedInput
-}
-
 input WingUpdateWithWhereUniqueNestedInput {
   where: WingWhereUniqueInput!
   data: WingUpdateDataInput!
-}
-
-input WingUpsertNestedInput {
-  update: WingUpdateDataInput!
-  create: WingCreateInput!
 }
 
 input WingUpsertWithWhereUniqueNestedInput {

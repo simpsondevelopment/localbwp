@@ -35,6 +35,16 @@ const Query = {
 
     return prisma.query.beers();
   },
+  pizzas(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+
+    return prisma.query.pizzas();
+  },
+  locations(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+
+    return prisma.query.locations();
+  },
 };
 
 export { Query as default };
