@@ -1,5 +1,5 @@
 # source: http://localhost:4466/localbwp/dev
-# timestamp: Mon Mar 29 2021 23:05:39 GMT-0600 (Mountain Daylight Time)
+# timestamp: Tue Mar 30 2021 19:00:37 GMT-0600 (Mountain Daylight Time)
 
 type AggregateUser {
   count: Int!
@@ -77,6 +77,9 @@ type User implements Node {
   password: String!
   updatedAt: DateTime!
   createdAt: DateTime!
+  city: String
+  postalCode: String
+  rating: Int
 }
 
 """A connection to a list of items."""
@@ -93,6 +96,9 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
+  city: String
+  postalCode: String
+  rating: Int
 }
 
 """An edge in a connection."""
@@ -117,6 +123,12 @@ enum UserOrderByInput {
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+  city_ASC
+  city_DESC
+  postalCode_ASC
+  postalCode_DESC
+  rating_ASC
+  rating_DESC
 }
 
 type UserPreviousValues {
@@ -126,6 +138,9 @@ type UserPreviousValues {
   password: String!
   updatedAt: DateTime!
   createdAt: DateTime!
+  city: String
+  postalCode: String
+  rating: Int
 }
 
 type UserSubscriptionPayload {
@@ -171,6 +186,9 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  city: String
+  postalCode: String
+  rating: Int
 }
 
 input UserWhereInput {
@@ -386,6 +404,108 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  postalCode: String
+
+  """All values that are not equal to given value."""
+  postalCode_not: String
+
+  """All values that are contained in given list."""
+  postalCode_in: [String!]
+
+  """All values that are not contained in given list."""
+  postalCode_not_in: [String!]
+
+  """All values less than the given value."""
+  postalCode_lt: String
+
+  """All values less than or equal the given value."""
+  postalCode_lte: String
+
+  """All values greater than the given value."""
+  postalCode_gt: String
+
+  """All values greater than or equal the given value."""
+  postalCode_gte: String
+
+  """All values containing the given string."""
+  postalCode_contains: String
+
+  """All values not containing the given string."""
+  postalCode_not_contains: String
+
+  """All values starting with the given string."""
+  postalCode_starts_with: String
+
+  """All values not starting with the given string."""
+  postalCode_not_starts_with: String
+
+  """All values ending with the given string."""
+  postalCode_ends_with: String
+
+  """All values not ending with the given string."""
+  postalCode_not_ends_with: String
+  rating: Int
+
+  """All values that are not equal to given value."""
+  rating_not: Int
+
+  """All values that are contained in given list."""
+  rating_in: [Int!]
+
+  """All values that are not contained in given list."""
+  rating_not_in: [Int!]
+
+  """All values less than the given value."""
+  rating_lt: Int
+
+  """All values less than or equal the given value."""
+  rating_lte: Int
+
+  """All values greater than the given value."""
+  rating_gt: Int
+
+  """All values greater than or equal the given value."""
+  rating_gte: Int
 }
 
 input UserWhereUniqueInput {

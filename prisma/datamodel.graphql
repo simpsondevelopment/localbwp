@@ -5,4 +5,7 @@ type User {
   password: String!
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
+  city: String
+  postalCode: String
+  rating: Int
 }
