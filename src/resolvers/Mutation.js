@@ -112,10 +112,57 @@ const Mutation = {
               id: userId,
             },
           },
+          pizza: {
+            connect: {
+              pizzaId: args.data.pizzaId,
+            },
+          },
         },
       },
       info
     );
+  },
+  addPizzaFavourite(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    const pizza = prisma.query.pizzas({ where: { id: args.pizzaId } });
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        ...args.data,
+      },
+    });
+  },
+  addBeerFavourite(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    const beer = prisma.query.beer({ where: { id: args.beerId } });
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        ...args.data,
+      },
+    });
+  },
+  addWingFavourite(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    const wing = prisma.query.wings({ where: { id: args.wingId } });
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        ...args.data,
+      },
+    });
   },
 };
 

@@ -8,6 +8,9 @@ type User {
   city: String
   postalCode: String
   rating: Int
+  pizzaFavourites: [Pizza!]!
+  beerFavourites: [Beer!]!
+  wingFavourites: [Wing!]!
 }
 
 type Location {
@@ -59,6 +62,7 @@ type Pizza {
 type Review {
   id: ID! @unique @id
   name: User!
+  pizzaId: Pizza!
   price: Float
   rating: Float!
   comments: String
