@@ -122,9 +122,9 @@ const Mutation = {
       info
     );
   },
-  addPizzaFavourite(parent, args, { prisma, request }, info) {
-    const userId = getUserId(request);
-    const pizza = prisma.query.pizzas({ where: { id: args.pizzaId } });
+  async addPizzaFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+    const pizza = await prisma.query.pizzas({ where: { id: args.pizzaId } });
 
     return prisma.mutation.updateUser({
       where: {
@@ -132,13 +132,17 @@ const Mutation = {
       },
 
       data: {
-        ...args.data,
+        pizzaFavourites: {
+          connect: {
+            id: args.data.pizzaId,
+          },
+        },
       },
     });
   },
-  addBeerFavourite(parent, args, { prisma, request }, info) {
-    const userId = getUserId(request);
-    const beer = prisma.query.beer({ where: { id: args.beerId } });
+  async removePizzaFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+    const pizza = await prisma.query.pizzas({ where: { id: args.pizzaId } });
 
     return prisma.mutation.updateUser({
       where: {
@@ -146,13 +150,19 @@ const Mutation = {
       },
 
       data: {
-        ...args.data,
+        pizzaFavourites: {
+          disconnect: {
+            id: args.data.pizzaId,
+          },
+        },
       },
     });
   },
-  addWingFavourite(parent, args, { prisma, request }, info) {
-    const userId = getUserId(request);
-    const wing = prisma.query.wings({ where: { id: args.wingId } });
+  async addBeerFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+    const beer = await prisma.query.beer({ where: { id: args.data.beerId } });
+    console.log(beer);
+    console.log(args);
 
     return prisma.mutation.updateUser({
       where: {
@@ -160,7 +170,64 @@ const Mutation = {
       },
 
       data: {
-        ...args.data,
+        beerFavourites: {
+          connect: {
+            id: args.data.beerId,
+          },
+        },
+      },
+    });
+  },
+
+  async removeBeerFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+    const beer = await prisma.query.beer({ where: { id: args.data.beerId } });
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        beerFavourites: {
+          disconnect: {
+            id: args.data.beerId,
+          },
+        },
+      },
+    });
+  },
+  async addWingFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        wingFavourites: {
+          connect: {
+            id: args.data.wingId,
+          },
+        },
+      },
+    });
+  },
+  async removeWingFavourite(parent, args, { prisma, request }, info) {
+    const userId = await getUserId(request);
+
+    return prisma.mutation.updateUser({
+      where: {
+        id: userId,
+      },
+
+      data: {
+        wingFavourites: {
+          disconnect: {
+            id: args.data.wingId,
+          },
+        },
       },
     });
   },

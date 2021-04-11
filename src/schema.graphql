@@ -28,9 +28,12 @@ type Mutation {
   login(data: LoginUserInput!): AuthPayload!
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
-  addPizzaFavourite(data: AddPizzaFavouriteInput!): User!
-  addBeerFavourite(data: AddBeerFavouriteInput!): User!
-  addWingFavourite(data: AddWingFavouriteInput!): User!
+  addPizzaFavourite(data: PizzaFavouriteInput!): User!
+  removePizzaFavourite(data: PizzaFavouriteInput!): User!
+  addBeerFavourite(data: BeerFavouriteInput!): User!
+  removeBeerFavourite(data: BeerFavouriteInput!): User!
+  addWingFavourite(data: WingFavouriteInput!): User!
+  removeWingFavourite(data: WingFavouriteInput!): User!
 }
 
 # type Subscription {
@@ -50,18 +53,15 @@ input CreateLocationInput {
   longitude: Float
 }
 
-input AddPizzaFavouriteInput {
-  userId: ID!
+input PizzaFavouriteInput {
   pizzaId: ID!
 }
 
-input AddWingFavouriteInput {
-  userId: ID!
+input WingFavouriteInput {
   wingId: ID!
 }
 
-input AddBeerFavouriteInput {
-  userId: ID!
+input BeerFavouriteInput {
   beerId: ID!
 }
 
@@ -109,6 +109,7 @@ input UpdateUserInput {
   name: String
   email: String
   password: String
+  beerId: ID
 }
 "This section is for models ----------------------------------------------------------------"
 type User {
@@ -119,9 +120,9 @@ type User {
   city: String
   postalCode: String
   rating: Int
-  pizzaFavourites: [Pizza!]!
-  beerFavourites: [Beer!]!
-  wingFavourites: [Wing!]!
+  pizzaFavourites: [Pizza!]
+  beerFavourites: [Beer!]
+  wingFavourites: [Wing!]
   updatedAt: String!
   createdAt: String!
 }
