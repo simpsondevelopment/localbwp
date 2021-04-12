@@ -5,4 +5,67 @@ type User {
   password: String!
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
+  city: String
+  postalCode: String
+  rating: Int
+  pizzaFavourites: [Pizza!]!
+  beerFavourites: [Beer!]!
+  wingFavourites: [Wing!]!
+}
+
+type Location {
+  id: ID! @unique @id
+  name: String!
+  city: String
+  postalCode: String @unique
+  latitude: Float
+  longitude: Float
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime!
+  pizzas: [Pizza!]!
+  wings: [Wing!]!
+  beers: [Beer!]!
+}
+
+type Wing {
+  id: ID! @unique @id
+  flavour: String!
+  price: Float
+
+  rating: Float!
+  quantity: Int
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Beer {
+  id: ID! @unique @id
+  brand: String!
+  price: Float
+  rating: Float!
+
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Pizza {
+  id: ID! @unique @id
+  style: String!
+  size: String!
+  price: Float
+  rating: Float!
+
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Review {
+  id: ID! @unique @id
+  name: User!
+  pizzaId: Pizza!
+  price: Float
+  rating: Float!
+  comments: String
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
 }
