@@ -1,5 +1,5 @@
 # source: http://localhost:4466/localbwp/dev
-# timestamp: Mon Apr 05 2021 18:31:52 GMT-0600 (Mountain Daylight Time)
+# timestamp: Mon Apr 12 2021 17:15:13 GMT-0600 (Mountain Daylight Time)
 
 type AggregateBeer {
   count: Int!
@@ -753,42 +753,42 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
+  createUser(data: UserCreateInput!): User!
   createLocation(data: LocationCreateInput!): Location!
   createReview(data: ReviewCreateInput!): Review!
   createWing(data: WingCreateInput!): Wing!
   createBeer(data: BeerCreateInput!): Beer!
   createPizza(data: PizzaCreateInput!): Pizza!
-  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateLocation(data: LocationUpdateInput!, where: LocationWhereUniqueInput!): Location
   updateReview(data: ReviewUpdateInput!, where: ReviewWhereUniqueInput!): Review
   updateWing(data: WingUpdateInput!, where: WingWhereUniqueInput!): Wing
   updateBeer(data: BeerUpdateInput!, where: BeerWhereUniqueInput!): Beer
   updatePizza(data: PizzaUpdateInput!, where: PizzaWhereUniqueInput!): Pizza
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteUser(where: UserWhereUniqueInput!): User
   deleteLocation(where: LocationWhereUniqueInput!): Location
   deleteReview(where: ReviewWhereUniqueInput!): Review
   deleteWing(where: WingWhereUniqueInput!): Wing
   deleteBeer(where: BeerWhereUniqueInput!): Beer
   deletePizza(where: PizzaWhereUniqueInput!): Pizza
-  deleteUser(where: UserWhereUniqueInput!): User
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertLocation(where: LocationWhereUniqueInput!, create: LocationCreateInput!, update: LocationUpdateInput!): Location!
   upsertReview(where: ReviewWhereUniqueInput!, create: ReviewCreateInput!, update: ReviewUpdateInput!): Review!
   upsertWing(where: WingWhereUniqueInput!, create: WingCreateInput!, update: WingUpdateInput!): Wing!
   upsertBeer(where: BeerWhereUniqueInput!, create: BeerCreateInput!, update: BeerUpdateInput!): Beer!
   upsertPizza(where: PizzaWhereUniqueInput!, create: PizzaCreateInput!, update: PizzaUpdateInput!): Pizza!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyLocations(data: LocationUpdateInput!, where: LocationWhereInput): BatchPayload!
   updateManyReviews(data: ReviewUpdateInput!, where: ReviewWhereInput): BatchPayload!
   updateManyWings(data: WingUpdateInput!, where: WingWhereInput): BatchPayload!
   updateManyBeers(data: BeerUpdateInput!, where: BeerWhereInput): BatchPayload!
   updateManyPizzas(data: PizzaUpdateInput!, where: PizzaWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyLocations(where: LocationWhereInput): BatchPayload!
   deleteManyReviews(where: ReviewWhereInput): BatchPayload!
   deleteManyWings(where: WingWhereInput): BatchPayload!
   deleteManyBeers(where: BeerWhereInput): BatchPayload!
   deleteManyPizzas(where: PizzaWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1201,24 +1201,24 @@ input PizzaWhereUniqueInput {
 }
 
 type Query {
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   locations(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Location]!
   reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review]!
   wings(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wing]!
   beers(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Beer]!
   pizzas(where: PizzaWhereInput, orderBy: PizzaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pizza]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  user(where: UserWhereUniqueInput!): User
   location(where: LocationWhereUniqueInput!): Location
   review(where: ReviewWhereUniqueInput!): Review
   wing(where: WingWhereUniqueInput!): Wing
   beer(where: BeerWhereUniqueInput!): Beer
   pizza(where: PizzaWhereUniqueInput!): Pizza
-  user(where: UserWhereUniqueInput!): User
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   locationsConnection(where: LocationWhereInput, orderBy: LocationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LocationConnection!
   reviewsConnection(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReviewConnection!
   wingsConnection(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WingConnection!
   beersConnection(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BeerConnection!
   pizzasConnection(where: PizzaWhereInput, orderBy: PizzaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PizzaConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1229,7 +1229,7 @@ type Query {
 
 type Review implements Node {
   id: ID!
-  name(where: UserWhereInput): User!
+  author(where: UserWhereInput): User!
   pizzaId(where: PizzaWhereInput): Pizza!
   price: Float
   rating: Float!
@@ -1252,7 +1252,19 @@ input ReviewCreateInput {
   price: Float
   rating: Float!
   comments: String
-  name: UserCreateOneInput!
+  author: UserCreateOneWithoutReviewsInput!
+  pizzaId: PizzaCreateOneInput!
+}
+
+input ReviewCreateManyWithoutAuthorInput {
+  create: [ReviewCreateWithoutAuthorInput!]
+  connect: [ReviewWhereUniqueInput!]
+}
+
+input ReviewCreateWithoutAuthorInput {
+  price: Float
+  rating: Float!
+  comments: String
   pizzaId: PizzaCreateOneInput!
 }
 
@@ -1332,8 +1344,35 @@ input ReviewUpdateInput {
   price: Float
   rating: Float
   comments: String
-  name: UserUpdateOneInput
+  author: UserUpdateOneWithoutReviewsInput
   pizzaId: PizzaUpdateOneInput
+}
+
+input ReviewUpdateManyWithoutAuthorInput {
+  create: [ReviewCreateWithoutAuthorInput!]
+  connect: [ReviewWhereUniqueInput!]
+  disconnect: [ReviewWhereUniqueInput!]
+  delete: [ReviewWhereUniqueInput!]
+  update: [ReviewUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [ReviewUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input ReviewUpdateWithoutAuthorDataInput {
+  price: Float
+  rating: Float
+  comments: String
+  pizzaId: PizzaUpdateOneInput
+}
+
+input ReviewUpdateWithWhereUniqueWithoutAuthorInput {
+  where: ReviewWhereUniqueInput!
+  data: ReviewUpdateWithoutAuthorDataInput!
+}
+
+input ReviewUpsertWithWhereUniqueWithoutAuthorInput {
+  where: ReviewWhereUniqueInput!
+  update: ReviewUpdateWithoutAuthorDataInput!
+  create: ReviewCreateWithoutAuthorInput!
 }
 
 input ReviewWhereInput {
@@ -1513,7 +1552,7 @@ input ReviewWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
-  name: UserWhereInput
+  author: UserWhereInput
   pizzaId: PizzaWhereInput
 }
 
@@ -1522,12 +1561,12 @@ input ReviewWhereUniqueInput {
 }
 
 type Subscription {
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   location(where: LocationSubscriptionWhereInput): LocationSubscriptionPayload
   review(where: ReviewSubscriptionWhereInput): ReviewSubscriptionPayload
   wing(where: WingSubscriptionWhereInput): WingSubscriptionPayload
   beer(where: BeerSubscriptionWhereInput): BeerSubscriptionPayload
   pizza(where: PizzaSubscriptionWhereInput): PizzaSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User implements Node {
@@ -1540,6 +1579,7 @@ type User implements Node {
   city: String
   postalCode: String
   rating: Int
+  reviews(where: ReviewWhereInput, orderBy: ReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Review!]
   pizzaFavourites(where: PizzaWhereInput, orderBy: PizzaOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Pizza!]
   beerFavourites(where: BeerWhereInput, orderBy: BeerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Beer!]
   wingFavourites(where: WingWhereInput, orderBy: WingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Wing!]
@@ -1562,14 +1602,27 @@ input UserCreateInput {
   city: String
   postalCode: String
   rating: Int
+  reviews: ReviewCreateManyWithoutAuthorInput
   pizzaFavourites: PizzaCreateManyInput
   beerFavourites: BeerCreateManyInput
   wingFavourites: WingCreateManyInput
 }
 
-input UserCreateOneInput {
-  create: UserCreateInput
+input UserCreateOneWithoutReviewsInput {
+  create: UserCreateWithoutReviewsInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutReviewsInput {
+  name: String!
+  email: String!
+  password: String!
+  city: String
+  postalCode: String
+  rating: Int
+  pizzaFavourites: PizzaCreateManyInput
+  beerFavourites: BeerCreateManyInput
+  wingFavourites: WingCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1653,18 +1706,6 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
-input UserUpdateDataInput {
-  name: String
-  email: String
-  password: String
-  city: String
-  postalCode: String
-  rating: Int
-  pizzaFavourites: PizzaUpdateManyInput
-  beerFavourites: BeerUpdateManyInput
-  wingFavourites: WingUpdateManyInput
-}
-
 input UserUpdateInput {
   name: String
   email: String
@@ -1672,22 +1713,35 @@ input UserUpdateInput {
   city: String
   postalCode: String
   rating: Int
+  reviews: ReviewUpdateManyWithoutAuthorInput
   pizzaFavourites: PizzaUpdateManyInput
   beerFavourites: BeerUpdateManyInput
   wingFavourites: WingUpdateManyInput
 }
 
-input UserUpdateOneInput {
-  create: UserCreateInput
+input UserUpdateOneWithoutReviewsInput {
+  create: UserCreateWithoutReviewsInput
   connect: UserWhereUniqueInput
   delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
+  update: UserUpdateWithoutReviewsDataInput
+  upsert: UserUpsertWithoutReviewsInput
 }
 
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
+input UserUpdateWithoutReviewsDataInput {
+  name: String
+  email: String
+  password: String
+  city: String
+  postalCode: String
+  rating: Int
+  pizzaFavourites: PizzaUpdateManyInput
+  beerFavourites: BeerUpdateManyInput
+  wingFavourites: WingUpdateManyInput
+}
+
+input UserUpsertWithoutReviewsInput {
+  update: UserUpdateWithoutReviewsDataInput!
+  create: UserCreateWithoutReviewsInput!
 }
 
 input UserWhereInput {
@@ -2005,6 +2059,9 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   rating_gte: Int
+  reviews_every: ReviewWhereInput
+  reviews_some: ReviewWhereInput
+  reviews_none: ReviewWhereInput
   pizzaFavourites_every: PizzaWhereInput
   pizzaFavourites_some: PizzaWhereInput
   pizzaFavourites_none: PizzaWhereInput

@@ -25,6 +25,8 @@ type Mutation {
   createPizza(data: CreatePizzaInput!): Pizza!
   createLocation(data: CreateLocationInput!): Location!
   createReview(data: CreateReviewInput!): Review!
+  deleteReview(data: DeleteReviewInput!): Review!
+  updateReview(data: UpdateReviewInput!): Review!
   login(data: LoginUserInput!): AuthPayload!
   deleteUser: User!
   updateUser(data: UpdateUserInput!): User!
@@ -43,6 +45,10 @@ type Mutation {
 type AuthPayload {
   token: String!
   user: User!
+}
+
+input DeleteReviewInput {
+  id: ID!
 }
 
 input CreateLocationInput {
@@ -85,8 +91,16 @@ input CreateWingInput {
   quantity: Int
 }
 
+input UpdateReviewInput {
+  id: ID!
+  price: Float
+  comments: String
+  rating: Float
+}
+
 input CreateReviewInput {
   price: Float
+  pizzaId: ID!
   rating: Float!
   comments: String
 }
@@ -120,9 +134,11 @@ type User {
   city: String
   postalCode: String
   rating: Int
+  reviews: [Review!]
   pizzaFavourites: [Pizza!]
   beerFavourites: [Beer!]
   wingFavourites: [Wing!]
+
   updatedAt: String!
   createdAt: String!
 }
@@ -171,11 +187,12 @@ type Pizza {
 }
 
 type Review {
-  name: User!
-  pizza: Pizza!
+  id: ID
+  pizzaId: Pizza!
   rating: Float!
   price: Float
   comments: String
+  author: User!
   updatedAt: String!
   createdAt: String!
 }

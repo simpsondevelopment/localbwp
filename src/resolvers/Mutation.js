@@ -99,7 +99,7 @@ const Mutation = {
   },
   createReview(parent, args, { prisma, request }, info) {
     const userId = getUserId(request);
-    console.log(userId);
+    console.log(args.data);
 
     return prisma.mutation.createReview(
       {
@@ -107,16 +107,47 @@ const Mutation = {
           price: args.data.price,
           rating: args.data.rating,
           comments: args.data.comments,
-          name: {
+          author: {
             connect: {
               id: userId,
             },
           },
-          pizza: {
+          pizzaId: {
             connect: {
-              pizzaId: args.data.pizzaId,
+              id: args.data.pizzaId,
             },
           },
+        },
+      },
+      info
+    );
+  },
+  async deleteReview(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    console.log(args.data);
+
+    return prisma.mutation.deleteReview(
+      {
+        where: {
+          id: args.data.id,
+        },
+      },
+      info
+    );
+  },
+  async updateReview(parent, args, { prisma, request }, info) {
+    const userId = getUserId(request);
+    console.log(args.data);
+
+    return prisma.mutation.updateReview(
+      {
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          comments: args.data.comments,
+          price: args.data.price,
+          rating: args.data.rating,
         },
       },
       info
